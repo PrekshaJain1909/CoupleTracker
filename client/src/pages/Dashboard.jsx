@@ -40,6 +40,7 @@ export default function Dashboard({ user, onLogout }) {
     { name: "📝 LoveNotes", path: `${base}/love-notes` },
     { name: "💞 Timelines", path: `${base}/timelines` },
     { name: "📊 Analytics", path: `${base}/analytics` },
+    { name: "📷 Photos", path: `${base}/photos` },
     { name: "🎁 MemoryBox", path: `${base}/memorybox` },
   ];
 
