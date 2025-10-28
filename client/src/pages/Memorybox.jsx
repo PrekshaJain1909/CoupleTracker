@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import "./MemoryBox.css";
+import "./Memorybox.css";
 
 export default function MemoryBox({ user }) {
   const [memories, setMemories] = useState([]);
