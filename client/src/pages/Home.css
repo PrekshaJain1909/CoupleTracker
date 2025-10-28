@@ -1,0 +1,67 @@
+body {
+  background: linear-gradient(135deg, #ffe6f2, #fff5fa);
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.home-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: #d63384;
+  margin-bottom: 20px;
+}
+
+/* Card Design */
+.card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  border: 1px solid #f3c4da;
+  backdrop-filter: blur(6px);
+}
+
+.filter-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-label {
+  font-weight: 600;
+  color: #444;
+}
+
+.filter-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  border-color: #d63384;
+  outline: none;
+}
+
+/* Stats Section */
+.stats-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #c2185b;
+  margin-bottom: 10px;
+}
+
+.stats-list li {
+  padding: 3px 0;
+  color: #444;
+}

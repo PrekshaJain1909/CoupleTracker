@@ -1,0 +1,131 @@
+.today-stats {
+  padding: 24px;
+  background: linear-gradient(135deg, #ffe6f2, #fff0f6, #ffffff);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(255, 105, 180, 0.35);
+  margin-top: 24px;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating hearts animation */
+.today-stats::before,
+.today-stats::after {
+  content: "❤️ 💕 💗 💞 💓";
+  position: absolute;
+  top: 10%;
+  left: 0;
+  width: 100%;
+  font-size: 1.2rem;
+  color: rgba(255, 105, 180, 0.25);
+  text-align: center;
+  animation: floatHearts 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatHearts {
+  0% {
+    transform: translateY(100%);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.today-stats h2 {
+  color: #d63384;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-shadow: 0 0 6px rgba(255, 182, 193, 0.7);
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.totals {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  background: rgba(255, 230, 242, 0.7);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.totals p {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #b0215f;
+  background: linear-gradient(90deg, #ff85b3, #d63384);
+  /* -webkit-background-clip: text; */
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.totals p:hover {
+  transform: scale(1.1);
+}
+
+.stats-table {
+  margin-bottom: 24px;
+}
+
+.stats-table h3 {
+  color: #b5179e;
+  margin-bottom: 8px;
+  font-style: italic;
+  text-align: center;
+}
+
+.table-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-evenly;
+}
+
+.table-column {
+  flex: 1;
+  background: linear-gradient(135deg, #fff0f6, #ffe6f2);
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #f7c1d9;
+  min-height: 100px;
+  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.table-column:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(255, 105, 180, 0.3);
+}
+
+.table-column h4 {
+  text-align: center;
+  margin-bottom: 8px;
+  color: #d63384;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.table-column ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.table-column ul li::before {
+  content: "💗 ";
+}
+
+.table-column p {
+  text-align: center;
+  color: #555;
+  font-style: italic;
+}
