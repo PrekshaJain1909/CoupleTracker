@@ -6,8 +6,12 @@
   box-shadow: 0 3px 20px #f7a1b855;
   position: relative;
   overflow: hidden;
+  max-width: 1200px;
+  margin: auto;
+  transition: all 0.3s ease;
 }
 
+/* Floating hearts animation container */
 .hearts-container {
   position: absolute;
   top: 0;
@@ -25,6 +29,7 @@
   bottom: -20px;
 }
 
+/* Header */
 .memory-header {
   text-align: center;
   margin-bottom: 25px;
@@ -43,6 +48,7 @@
   color: #a33d5c;
 }
 
+/* Form Section */
 .memory-form {
   display: flex;
   flex-direction: column;
@@ -59,6 +65,8 @@
   border-radius: 10px;
   border: 1.5px solid #ffb6c1;
   font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .memory-form textarea {
@@ -99,6 +107,7 @@
   box-shadow: 0 4px 15px rgba(255, 182, 193, 0.6);
 }
 
+/* Memory Grid Layout */
 .memory-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -129,6 +138,7 @@
 .memory-card h3 {
   color: #c2185b;
   font-weight: 600;
+  margin: 5px 0;
 }
 
 .memory-card .date {
@@ -146,26 +156,115 @@
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.actions .edit {
-  background: #ffb6c1;
+.actions .edit,
+.actions .delete {
   border: none;
   border-radius: 8px;
   padding: 6px 12px;
   cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.actions .edit {
+  background: #ffb6c1;
 }
 
 .actions .delete {
   background: #f06292;
   color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 6px 12px;
-  cursor: pointer;
 }
 
 .memory-card:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 20px rgba(255, 182, 193, 0.6);
+}
+
+/* ✨ RESPONSIVENESS ✨ */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .memory-header h1 {
+    font-size: 2rem;
+  }
+
+  .memory-form {
+    gap: 8px;
+  }
+
+  .memory-card img {
+    height: 180px;
+  }
+}
+
+/* Mobiles */
+@media (max-width: 600px) {
+  .memory-container {
+    padding: 20px;
+  }
+
+  .memory-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .memory-header p {
+    font-size: 0.95rem;
+  }
+
+  .memory-form input,
+  .memory-form textarea,
+  .memory-form select {
+    font-size: 0.9rem;
+  }
+
+  .file-label {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  .memory-form button {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
+
+  .memory-card {
+    padding: 10px;
+  }
+
+  .memory-card img {
+    height: 160px;
+  }
+
+  .memory-card h3 {
+    font-size: 1rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .actions .edit,
+  .actions .delete {
+    width: 80%;
+  }
+}
+
+/* Small Phones */
+@media (max-width: 400px) {
+  .memory-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .memory-header p {
+    font-size: 0.9rem;
+  }
+
+  .memory-card img {
+    height: 140px;
+  }
 }

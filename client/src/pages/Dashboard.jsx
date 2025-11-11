@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Dashboard.css";
 
 export default function Dashboard({ user, onLogout }) {
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Floating hearts animation (randomized 💖💘💞💝💓)
+  // Floating hearts animation
   useEffect(() => {
     const heartEmojis = ["💖", "💞", "💘", "💝", "💓", "💕", "❤️"];
     const container = document.createElement("div");
@@ -22,7 +23,6 @@ export default function Dashboard({ user, onLogout }) {
       heart.style.animationDuration = 4 + Math.random() * 3 + "s";
       heart.style.fontSize = 16 + Math.random() * 20 + "px";
       heart.style.opacity = Math.random() * 0.6 + 0.4;
-
       container.appendChild(heart);
       setTimeout(() => heart.remove(), 7000);
     }, 500);
@@ -46,9 +46,23 @@ export default function Dashboard({ user, onLogout }) {
 
   return (
     <div className="dashboard-container">
-      {/* 💗 Existing Navbar (unchanged) */}
+      {/* 💗 Navbar */}
       <header className="romantic-header">
-        <nav className="romantic-nav">
+        <div className="nav-header">
+          <h2 className="brand-title">💖 Our LoveSpace 💖</h2>
+
+          {/* Hamburger Icon */}
+          <div
+            className={`hamburger ${menuOpen ? "active" : ""}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <nav className={`romantic-nav ${menuOpen ? "show" : ""}`}>
           {navItems.map((item) => (
             <motion.div
               key={item.path}
@@ -60,28 +74,30 @@ export default function Dashboard({ user, onLogout }) {
                 className={`nav-item ${
                   location.pathname === item.path ? "active" : ""
                 }`}
+                onClick={() => setMenuOpen(false)}
               >
                 {item.name}
               </Link>
             </motion.div>
           ))}
-        </nav>
 
-        <motion.button
-          className="logout-btn"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={onLogout}
-        >
-          Logout 💔
-        </motion.button>
+          <motion.button
+            className="logout-btn"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={onLogout}
+          >
+            Logout 💔
+          </motion.button>
+        </nav>
       </header>
 
+      {/* 💕 Main */}
       <main className="romantic-main">
         <Outlet />
       </main>
 
-      {/* 💞 Footer Section */}
+      {/* 💞 Footer */}
       <footer className="romantic-footer">
         <div className="footer-text">
           <p>💖 Made with endless love by {user?.name} & their forever person 💖</p>

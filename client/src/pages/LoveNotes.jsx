@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 // 💞 ErrorBoundary for crash safety
 class ErrorBoundary extends React.Component {
@@ -74,11 +78,25 @@ function LoveNotes() {
       [forgiver]: (prev[forgiver] || 0) + 2,
       [apologizer]: (prev[apologizer] || 0) + 1,
     }));
+
+    MySwal.fire({
+      icon: "success",
+      title: "Forgiveness Added 💞",
+      text: `${apologizer} apologized to ${forgiver}! Kindness points updated ✨`,
+      background: "#fff0f6",
+      confirmButtonColor: "#ec4899",
+    });
   };
 
   const generatePunishment = () => {
     const random = punishments[Math.floor(Math.random() * punishments.length)];
-    alert(`💥 Punishment: ${random}`);
+    MySwal.fire({
+      icon: "info",
+      title: "💥 Punishment Time!",
+      text: random,
+      background: "#fff0f6",
+      confirmButtonColor: "#ec4899",
+    });
   };
 
   const recentForgiveness = (forgivenessList || []).slice(-5);
@@ -87,238 +105,220 @@ function LoveNotes() {
     .slice(0, 5);
 
   return (
-    <>
-      <style>{`
-        body {
-          background: linear-gradient(to bottom right, #f9c5d1, #fddde6, #fbc2eb);
-          font-family: 'Poppins', sans-serif;
-        }
-        .container {
-          max-width: 650px;
-          margin: 3rem auto;
-          background: linear-gradient(to bottom right, #fff5f7, #ffe6eb);
-          border-radius: 25px;
-          padding: 2.5rem;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-          text-align: center;
-          color: #e91e63;
-          font-weight: 800;
-          margin-bottom: 1.5rem;
-          text-shadow: 1px 1px 2px #fff;
-        }
-        h2 {
-          color: #d81b60;
-          margin-bottom: 1rem;
-          font-size: 1.4rem;
-        }
-        .section {
-          background: rgba(255, 255, 255, 0.8);
-          padding: 1.5rem;
-          border-radius: 15px;
-          margin-bottom: 1.5rem;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .form-input {
-          padding: 0.8rem;
-          border-radius: 10px;
-          border: 1px solid #f48fb1;
-          width: 100%;
-          margin-bottom: 0.8rem;
-          font-size: 1rem;
-        }
-        .form-btn {
-          background-color: #ec407a;
-          color: white;
-          border: none;
-          border-radius: 10px;
-          padding: 0.8rem;
-          font-weight: bold;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        .form-btn:hover {
-          background-color: #d81b60;
-          transform: scale(1.05);
-        }
-        ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-        li {
-          background: linear-gradient(to right, #ffe5ec, #ffd6e0);
-          padding: 0.8rem 1rem;
-          border-radius: 10px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 0.5rem;
-          font-size: 0.95rem;
-          box-shadow: 0 3px 5px rgba(0,0,0,0.05);
-        }
-        .punish-btn {
-          background-color: #f06292;
-          color: white;
-          border: none;
-          border-radius: 10px;
-          padding: 0.8rem 1rem;
-          cursor: pointer;
-          font-weight: bold;
-          transition: 0.3s;
-        }
-        .punish-btn:hover {
-          background-color: #ec407a;
-          transform: scale(1.05);
-        }
-        .moods {
-          display: flex;
-          justify-content: center;
-          flex-wrap: wrap;
-          gap: 10px;
-        }
-        .mood-btn {
-          font-size: 2rem;
-          background: white;
-          border: none;
-          border-radius: 10px;
-          padding: 10px;
-          cursor: pointer;
-          transition: 0.3s;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .mood-btn.active {
-          background-color: #f8bbd0;
-          border: 2px solid #f06292;
-        }
-        .leaderboard-item {
-          background: linear-gradient(to right, #ffe5f1, #ffd6e0);
-          padding: 0.8rem 1rem;
-          border-radius: 10px;
-          display: flex;
-          justify-content: space-between;
-          font-weight: 500;
-        }
-        .leaderboard-item:first-child {
-          background: linear-gradient(to right, #f48fb1, #f06292);
-          color: white;
-        }
-        .error-box {
-          text-align: center;
-          padding: 1.5rem;
-          background: #ffcdd2;
-          border-radius: 15px;
-          color: #b71c1c;
-          font-weight: bold;
-        }
-      `}</style>
+    <motion.div
+      className="love-container"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8 }}
+    >
+      <h1 className="title">💖 Love Notes 💖</h1>
 
-      <motion.div
-        className="container"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1>💖 Love Notes 💖</h1>
-
-        {/* Forgiveness Tracker */}
-        <section className="section">
-          <h2>Forgiveness Tracker 🙏</h2>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const apologizer = e.target.apologizer.value.trim();
-              const forgiver = e.target.forgiver.value.trim();
-              if (!apologizer || !forgiver)
-                return alert("Please fill both names!");
-              addForgiveness(apologizer, forgiver);
-              e.target.reset();
-            }}
+      {/* Forgiveness Tracker */}
+      <section className="card">
+        <h2 className="section-title">Forgiveness Tracker 🙏</h2>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            const apologizer = e.target.apologizer.value.trim();
+            const forgiver = e.target.forgiver.value.trim();
+            if (!apologizer || !forgiver) {
+              MySwal.fire({
+                icon: "warning",
+                title: "Oops 😅",
+                text: "Please fill both names!",
+                confirmButtonColor: "#ec4899",
+              });
+              return;
+            }
+            addForgiveness(apologizer, forgiver);
+            e.target.reset();
+          }}
+          className="form"
+        >
+          <input name="apologizer" placeholder="Who apologized? 💭" className="input" />
+          <input name="forgiver" placeholder="Who forgave? 💕" className="input" />
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            className="btn"
+            type="submit"
           >
-            <input
-              name="apologizer"
-              placeholder="Who apologized? 💭"
-              className="form-input"
-            />
-            <input
-              name="forgiver"
-              placeholder="Who forgave? 💕"
-              className="form-input"
-            />
-            <button type="submit" className="form-btn">
-              Add Forgiveness 💞
-            </button>
-          </form>
+            Add Forgiveness 💞
+          </motion.button>
+        </form>
 
-          <ul>
-            {recentForgiveness.map((item) => (
-              <li key={item.id}>
-                <span>
-                  <b>{item.apologizer}</b> apologized to <b>{item.forgiver}</b>
-                </span>
-                <span>{item.date}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <ul className="list">
+          {recentForgiveness.map((item) => (
+            <motion.li
+              key={item.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="list-item"
+            >
+              <span>
+                <b>{item.apologizer}</b> apologized to <b>{item.forgiver}</b>
+              </span>
+              <span className="date">{item.date}</span>
+            </motion.li>
+          ))}
+        </ul>
+      </section>
 
-        {/* Punishment Generator */}
-        <section className="section">
-          <h2>Punishment Generator 🎁</h2>
-          <button className="punish-btn" onClick={generatePunishment}>
-            Generate Punishment 💥
-          </button>
-        </section>
+      {/* Punishment Generator */}
+      <section className="card">
+        <h2 className="section-title">Punishment Generator 🎁</h2>
+        <motion.button
+          whileHover={{ scale: 1.1, rotate: 1 }}
+          className="punish-btn"
+          onClick={generatePunishment}
+        >
+          Generate Punishment 💥
+        </motion.button>
+      </section>
 
-        {/* Mood Tracker */}
-        <section className="section">
-          <h2>Mood Tracker 🪞</h2>
-          <div className="moods">
-            {["😊", "🥰", "😢", "😡", "🤗", "😴"].map((m) => (
-              <button
-                key={m}
-                className={`mood-btn ${mood === m ? "active" : ""}`}
-                onClick={() => setMood(m)}
+      {/* Mood Tracker */}
+      <section className="card">
+        <h2 className="section-title">Mood Tracker 🪞</h2>
+        <div className="emoji-row">
+          {["😊", "🥰", "😢", "😡", "🤗", "😴"].map((m) => (
+            <motion.button
+              key={m}
+              whileHover={{ scale: 1.2 }}
+              onClick={() => setMood(m)}
+              className={`emoji ${mood === m ? "active" : ""}`}
+            >
+              {m}
+            </motion.button>
+          ))}
+        </div>
+        <p className="mood-text">
+          Current mood: <span>{mood}</span>
+        </p>
+      </section>
+
+      {/* Leaderboard */}
+      <section className="card">
+        <h2 className="section-title text-center">🌟 Kindness Leaderboard 🌟</h2>
+        <ul className="list">
+          {sortedLeaderboard.length > 0 ? (
+            sortedLeaderboard.map(([name, points], index) => (
+              <motion.li
+                key={name}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`leader-item ${index === 0 ? "top" : ""}`}
               >
-                {m}
-              </button>
-            ))}
-          </div>
-          <p style={{ textAlign: "center", marginTop: "10px", fontSize: "1.1rem" }}>
-            Current mood: <span style={{ color: "#e91e63" }}>{mood}</span>
-          </p>
-        </section>
-
-        {/* Leaderboard */}
-        <section className="section">
-          <h2>🌟 Kindness Leaderboard 🌟</h2>
-          <ul>
-            {sortedLeaderboard.length > 0 ? (
-              sortedLeaderboard.map(([name, points], index) => (
-                <li key={name} className="leaderboard-item">
-                  <span>{name}</span>
-                  <span>{points} 💫</span>
-                </li>
-              ))
-            ) : (
-              <li style={{ textAlign: "center", color: "#888" }}>
-                No data yet 💭
-              </li>
-            )}
-          </ul>
-        </section>
-      </motion.div>
-    </>
+                <span>{name}</span>
+                <span>{points} 💫</span>
+              </motion.li>
+            ))
+          ) : (
+            <li className="no-data">No data yet 💭</li>
+          )}
+        </ul>
+      </section>
+    </motion.div>
   );
 }
 
 export default function LoveNotesPage() {
   return (
-    <div>
+    <div className="page">
       <ErrorBoundary>
         <LoveNotes />
       </ErrorBoundary>
     </div>
   );
 }
+
+/* 🌸 Internal CSS */
+const style = document.createElement("style");
+style.textContent = `
+  .page {
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #fbcfe8, #fce7f3, #f9a8d4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .love-container {
+    max-width: 700px;
+    width: 100%;
+    background: linear-gradient(135deg, #fef2f2, #fce7f3);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #ec4899;
+    margin-bottom: 1.5rem;
+  }
+  .card {
+    background: rgba(255,255,255,0.8);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
+  }
+  .section-title {
+    color: #db2777;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .form { display: flex; flex-direction: column; gap: 0.75rem; }
+  .input {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #f9a8d4;
+    font-size: 1rem;
+  }
+  .btn {
+    background: #ec4899;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+  }
+  .list { margin-top: 1rem; list-style: none; padding: 0; }
+  .list-item {
+    display: flex; justify-content: space-between;
+    background: linear-gradient(to right, #fce7f3, #fbcfe8);
+    border-radius: 8px; padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .date { color: gray; font-size: 0.85rem; }
+  .punish-btn {
+    background: #f87171; color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none; cursor: pointer;
+  }
+  .emoji-row { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .emoji { font-size: 2rem; background: white; border-radius: 8px; padding: 0.5rem; cursor: pointer; }
+  .emoji.active { background: #f9a8d4; border: 2px solid #ec4899; }
+  .mood-text { text-align: center; margin-top: 0.75rem; color: #4b5563; font-weight: 500; }
+  .leader-item {
+    display: flex; justify-content: space-between;
+    background: linear-gradient(to right, #fce7f3, #fbcfe8);
+    border-radius: 8px; padding: 0.5rem 1rem;
+  }
+  .leader-item.top {
+    background: linear-gradient(to right, #f472b6, #ec4899);
+    color: white;
+  }
+  .no-data { text-align: center; color: gray; font-style: italic; }
+  .error-box {
+    text-align: center;
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+`;
+document.head.appendChild(style);

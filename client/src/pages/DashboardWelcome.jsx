@@ -5,7 +5,6 @@ export default function DashboardWelcome() {
 
   return (
     <div style={styles.container}>
-      {/* Soft hearts/roses bg overlay */}
       <div style={styles.decorBg}></div>
       <div
         style={styles.card}
@@ -31,7 +30,6 @@ export default function DashboardWelcome() {
 
         {/* Content */}
         <div style={styles.content}>
-          {/* Title (romantic cursive) */}
           <h1
             style={{
               ...styles.title,
@@ -43,45 +41,40 @@ export default function DashboardWelcome() {
             Welcome to Your Cozy Corner 🌹
           </h1>
 
-          {/* Description */}
           <p
             style={{
               ...styles.description,
-              height: "30px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
               fontSize: hover ? "42px" : "18px",
               color: hover ? "#F62459" : "#b03060",
-              letterSpacing: "1px",
+              letterSpacing: hover ? "1.5px" : "0.5px",
               textShadow: hover ? "0 3px 14px #fff0fa" : "none",
-              transition: "all 0.5s ease",
               transform: hover ? "translateY(-25px)" : "translateY(0)",
+              transition: "all 0.5s ease",
             }}
           >
-            {hover ? "💕" : "Cherish every moment and let this space be your little retreat. Soft light, warm vibes, and gentle memories await here."}
+            {hover
+              ? "💕"
+              : "Cherish every moment and let this space be your little retreat. Soft light, warm vibes, and gentle memories await here."}
           </p>
 
-          {/* Button hides on hover */}
-          {!hover && (
-            <button style={styles.button}>
-              Explore the Moments ✨
-            </button>
-          )}
+          {!hover && <button style={styles.button}>Explore the Moments ✨</button>}
         </div>
       </div>
+
+      {/* Embedded responsive CSS */}
+      <style>{responsiveCSS}</style>
     </div>
   );
 }
 
-// Inline CSS with romantic theme
 const styles = {
   container: {
     minHeight: "100vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: "radial-gradient(circle at 40% 20%, #fff0f6 0%, #fce4ec 55%, #ffe4ee 100%)",
+    background:
+      "radial-gradient(circle at 40% 20%, #fff0f6 0%, #fce4ec 55%, #ffe4ee 100%)",
     fontFamily: "'Poppins', sans-serif",
     padding: "20px",
     position: "relative",
@@ -97,7 +90,7 @@ const styles = {
     backgroundImage:
       "url('https://www.transparenttextures.com/patterns/hearts.png'), url('https://www.transparenttextures.com/patterns/roses.png')",
     backgroundRepeat: "repeat, repeat",
-    opacity: 0.10,
+    opacity: 0.1,
     mixBlendMode: "multiply",
   },
   card: {
@@ -112,6 +105,7 @@ const styles = {
     cursor: "pointer",
     border: "2.5px solid #fbb1b8",
     zIndex: 2,
+    transition: "all 0.3s ease",
   },
   imageContainer: {
     width: "100%",
@@ -137,7 +131,7 @@ const styles = {
   },
   title: {
     fontSize: "32px",
-    color: "#c33764", // Deep pink
+    color: "#c33764",
     fontWeight: "700",
     marginBottom: "18px",
     letterSpacing: "2px",
@@ -163,3 +157,64 @@ const styles = {
     marginTop: "10px",
   },
 };
+
+// 🌷 Responsive media queries
+const responsiveCSS = `
+@media (max-width: 900px) {
+  h1 {
+    font-size: 28px !important;
+  }
+  p {
+    font-size: 16px !important;
+  }
+  button {
+    padding: 12px 28px !important;
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px !important;
+  }
+
+  div[style*='max-width: 600px'] {
+    max-width: 90% !important;
+    border-radius: 18px !important;
+  }
+
+  h1 {
+    font-size: 24px !important;
+    line-height: 1.3;
+  }
+
+  p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+
+  button {
+    width: 100%;
+    font-size: 14px !important;
+    padding: 12px !important;
+    border-radius: 20px !important;
+  }
+
+  img {
+    height: 220px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 20px !important;
+  }
+  p {
+    font-size: 13px !important;
+  }
+  button {
+    font-size: 13px !important;
+    padding: 10px 20px !important;
+  }
+}
+`;

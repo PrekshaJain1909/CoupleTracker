@@ -5,8 +5,12 @@
   border-radius: 20px;
   box-shadow: 0 3px 20px rgba(247, 161, 184, 0.3);
   text-align: center;
+  max-width: 900px;
+  margin: auto;
+  transition: all 0.3s ease;
 }
 
+/* 🌸 Title & Subtitle */
 .memory-title {
   font-size: 2.3rem;
   color: #e83e8c;
@@ -16,8 +20,10 @@
 .memory-subtitle {
   color: #a33d5c;
   margin-bottom: 25px;
+  font-size: 1.1rem;
 }
 
+/* ✨ Input Area */
 .memory-input-area {
   display: flex;
   flex-direction: column;
@@ -60,6 +66,7 @@
   box-shadow: 0 0 15px #ff9eb8;
 }
 
+/* 📝 Memory List */
 .memory-list {
   display: flex;
   flex-direction: column;
@@ -127,6 +134,7 @@
   font-style: italic;
   margin-top: 10px;
 }
+
 /* 🌈 Future Goals Section */
 .future-goals-section {
   margin-top: 40px;
@@ -141,6 +149,7 @@
 .future-goals-section h2 {
   color: #e75480;
   margin-bottom: 15px;
+  font-size: 1.8rem;
 }
 
 .goal-input {
@@ -149,6 +158,7 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
 .goal-input input {
@@ -169,6 +179,10 @@
   cursor: pointer;
   font-weight: 600;
   transition: 0.3s;
+}
+
+.goal-input button:hover {
+  transform: scale(1.05);
 }
 
 .goal-list {
@@ -202,4 +216,65 @@
 .no-goal {
   color: #999;
   font-style: italic;
+}
+
+/* 💎 Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 📱 RESPONSIVENESS */
+@media (max-width: 768px) {
+  .memory-title {
+    font-size: 1.8rem;
+  }
+
+  .memory-input-area textarea {
+    width: 95%;
+    height: 60px;
+  }
+
+  .memory-item {
+    width: 95%;
+  }
+
+  .goal-input input {
+    width: 80%;
+  }
+
+  .goal-list li {
+    width: 90%;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tiny-memory-container {
+    padding: 20px;
+  }
+
+  .memory-title {
+    font-size: 1.6rem;
+  }
+
+  .memory-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .memory-input-area button {
+    width: 80%;
+  }
+
+  .goal-input {
+    flex-direction: column;
+  }
+
+  .goal-input input {
+    width: 100%;
+  }
+
+  .goal-list li {
+    width: 95%;
+  }
 }

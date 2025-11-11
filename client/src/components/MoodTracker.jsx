@@ -53,15 +53,17 @@ export default function MoodTracker({ entries, onAddMood, onEditMood, onDeleteMo
             <option>Partner</option>
           </select>
 
-          {MOODS.map((mood) => (
-            <button
-              key={mood.label}
-              onClick={() => setSelectedMood(mood.emoji)}
-              className={`mood-btn ${selectedMood === mood.emoji ? "selected" : ""}`}
-            >
-              {mood.emoji}
-            </button>
-          ))}
+          <div className="mood-buttons">
+            {MOODS.map((mood) => (
+              <button
+                key={mood.label}
+                onClick={() => setSelectedMood(mood.emoji)}
+                className={`mood-btn ${selectedMood === mood.emoji ? "selected" : ""}`}
+              >
+                {mood.emoji}
+              </button>
+            ))}
+          </div>
 
           <button className="add-mood-btn" onClick={handleAddMood}>
             Add Mood
@@ -76,7 +78,9 @@ export default function MoodTracker({ entries, onAddMood, onEditMood, onDeleteMo
             {moodEntries.map((entry) => (
               <li key={entry.id} className="mood-item">
                 <div className="mood-info">
-                  <p className="mood-header">{entry.date} - {entry.who}</p>
+                  <p className="mood-header">
+                    {entry.date} - {entry.who}
+                  </p>
 
                   {editingId === entry.id ? (
                     <div className="edit-container">
@@ -90,8 +94,12 @@ export default function MoodTracker({ entries, onAddMood, onEditMood, onDeleteMo
                           </option>
                         ))}
                       </select>
-                      <button className="save-btn" onClick={() => handleSaveEdit(entry.id, selectedMood)}>Save</button>
-                      <button className="cancel-btn" onClick={() => setEditingId(null)}>Cancel</button>
+                      <button className="save-btn" onClick={() => handleSaveEdit(entry.id, selectedMood)}>
+                        Save
+                      </button>
+                      <button className="cancel-btn" onClick={() => setEditingId(null)}>
+                        Cancel
+                      </button>
                     </div>
                   ) : (
                     <p className="mood-emoji">{entry.mood}</p>
@@ -99,8 +107,12 @@ export default function MoodTracker({ entries, onAddMood, onEditMood, onDeleteMo
                 </div>
 
                 <div className="mood-actions">
-                  <button className="edit-btn" onClick={() => setEditingId(entry.id)}>Edit</button>
-                  <button className="delete-btn" onClick={() => onDeleteMood(entry.id)}>Delete</button>
+                  <button className="edit-btn" onClick={() => setEditingId(entry.id)}>
+                    Edit
+                  </button>
+                  <button className="delete-btn" onClick={() => onDeleteMood(entry.id)}>
+                    Delete
+                  </button>
                 </div>
               </li>
             ))}
@@ -115,91 +127,111 @@ export default function MoodTracker({ entries, onAddMood, onEditMood, onDeleteMo
           border-radius: 8px;
           box-shadow: 0 2px 8px rgba(0,0,0,0.1);
           margin-top: 24px;
-          max-width: 800px;
+          max-width: 900px;
           margin-left: auto;
           margin-right: auto;
+          font-family: "Poppins", sans-serif;
         }
 
         .mood-tracker h2 {
-          font-size: 1.5rem;
+          font-size: 1.6rem;
           font-weight: bold;
-          margin-bottom: 12px;
+          margin-bottom: 16px;
+          text-align: center;
+          color: #3b0764;
         }
 
+        /* Mood Selection */
         .mood-selection {
           display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
+          flex-direction: column;
           align-items: center;
-          margin-bottom: 16px;
+          gap: 12px;
+          margin-bottom: 20px;
         }
 
         .mood-selection select {
           padding: 8px;
-          border-radius: 4px;
+          border-radius: 6px;
           border: 1px solid #ccc;
+          width: 100%;
+          max-width: 150px;
+        }
+
+        .mood-buttons {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
         }
 
         .mood-btn {
-          font-size: 1.5rem;
-          padding: 6px 10px;
-          border-radius: 4px;
+          font-size: 1.6rem;
+          padding: 8px 12px;
+          border-radius: 6px;
           border: 1px solid #ccc;
+          background: #f8fafc;
           cursor: pointer;
-          background: none;
+          transition: all 0.3s;
+        }
+
+        .mood-btn:hover {
+          background-color: #e2e8f0;
         }
 
         .mood-btn.selected {
-          background-color: #e5e7eb;
+          background-color: #e0e7ff;
+          border-color: #6366f1;
         }
 
         .add-mood-btn {
-          padding: 8px 16px;
+          padding: 10px 20px;
           background-color: #3b82f6;
-          color: #fff;
+          color: white;
+          font-weight: 600;
           border: none;
-          border-radius: 4px;
+          border-radius: 6px;
           cursor: pointer;
+          transition: background 0.3s;
         }
 
         .add-mood-btn:hover {
           background-color: #2563eb;
         }
 
+        /* Mood Entries */
         .no-moods {
+          text-align: center;
           color: #6b7280;
         }
 
         .mood-list {
           list-style: none;
           padding: 0;
-          max-height: 256px;
+          max-height: 260px;
           overflow-y: auto;
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 12px;
         }
 
         .mood-item {
-          padding: 12px;
-          border: 1px solid #ccc;
-          border-radius: 6px;
+          padding: 14px;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          transition: background-color 0.2s;
+          gap: 8px;
+          transition: all 0.2s;
         }
 
         .mood-item:hover {
-          background-color: #f9f9f9;
-        }
-
-        .mood-info {
-          flex: 1;
+          background-color: #f9fafb;
         }
 
         .mood-header {
           font-weight: 600;
+          color: #374151;
         }
 
         .mood-emoji {
@@ -207,82 +239,75 @@ export default function MoodTracker({ entries, onAddMood, onEditMood, onDeleteMo
           margin-top: 4px;
         }
 
-        .edit-container {
-          display: flex;
-          gap: 8px;
-          margin-top: 4px;
-          align-items: center;
-        }
-
-        .edit-container select {
-          padding: 4px 8px;
-          border-radius: 4px;
-          border: 1px solid #ccc;
-        }
-
-        .save-btn {
-          background-color: #10b981;
-          color: #fff;
-          border: none;
-          border-radius: 4px;
-          padding: 4px 8px;
-          cursor: pointer;
-        }
-
-        .save-btn:hover {
-          background-color: #059669;
-        }
-
-        .cancel-btn {
-          background-color: #d1d5db;
-          border: none;
-          border-radius: 4px;
-          padding: 4px 8px;
-          cursor: pointer;
-        }
-
-        .cancel-btn:hover {
-          background-color: #9ca3af;
-        }
-
         .mood-actions {
           display: flex;
-          gap: 8px;
-          margin-top: 8px;
+          gap: 12px;
+          justify-content: flex-end;
         }
 
-        @media(min-width: 768px) {
-          .mood-item {
-            flex-direction: row;
-            align-items: center;
-          }
-          .mood-actions {
-            margin-top: 0;
-          }
+        .edit-btn, .delete-btn {
+          background: none;
+          border: none;
+          font-weight: 600;
+          cursor: pointer;
+          transition: color 0.2s;
         }
 
         .edit-btn {
           color: #3b82f6;
-          font-weight: bold;
-          background: none;
-          border: none;
-          cursor: pointer;
         }
-
         .edit-btn:hover {
           color: #1d4ed8;
         }
 
         .delete-btn {
           color: #ef4444;
-          font-weight: bold;
-          background: none;
-          border: none;
-          cursor: pointer;
         }
-
         .delete-btn:hover {
           color: #b91c1c;
+        }
+
+        .edit-container {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .save-btn, .cancel-btn {
+          padding: 6px 10px;
+          border-radius: 6px;
+          border: none;
+          cursor: pointer;
+          font-weight: 500;
+        }
+
+        .save-btn {
+          background-color: #10b981;
+          color: white;
+        }
+
+        .cancel-btn {
+          background-color: #e5e7eb;
+          color: #374151;
+        }
+
+        @media (min-width: 768px) {
+          .mood-selection {
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+          }
+
+          .mood-item {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .edit-container {
+            flex-direction: row;
+            align-items: center;
+          }
         }
       `}</style>
     </>

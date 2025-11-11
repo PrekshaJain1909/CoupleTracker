@@ -8,6 +8,7 @@
   overflow: hidden;
 }
 
+/* Heading Section */
 .timeline-heading {
   text-align: center;
   font-size: 2.5rem;
@@ -23,6 +24,7 @@
   margin-bottom: 40px;
 }
 
+/* Add Section */
 .add-section {
   text-align: center;
   margin-bottom: 60px;
@@ -36,10 +38,12 @@
   background: #fff0f5;
   color: #ff1493;
   width: 240px;
+  max-width: 90%;
 }
 
 .timeline-textarea {
   width: 500px;
+  max-width: 90%;
   height: 80px;
   margin: 10px auto;
   display: block;
@@ -71,11 +75,24 @@
   box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
 }
 
+/* Timeline Section */
 .timeline-container {
   position: relative;
   max-width: 900px;
   margin: 0 auto;
   padding: 20px 0;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: linear-gradient(180deg, #ff69b4, #ffb6c1, #ff69b4, #ff1493);
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ff69b4;
+  transform: translateX(-50%);
 }
 
 .timeline-item {
@@ -95,6 +112,7 @@
   text-align: left;
 }
 
+/* Card Content */
 .timeline-content {
   background: white;
   border-radius: 25px;
@@ -124,6 +142,7 @@
   font-style: italic;
 }
 
+/* Heart marker */
 .timeline-heart {
   width: 18px;
   height: 18px;
@@ -136,18 +155,7 @@
   box-shadow: 0 0 10px #ff69b4;
 }
 
-.timeline-line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 4px;
-  background: linear-gradient(180deg, #ff69b4, #ffb6c1, #ff69b4, #ff1493);
-  border-radius: 10px;
-  box-shadow: 0 0 10px #ff69b4;
-  transform: translateX(-50%);
-}
-
+/* Buttons under event */
 .event-actions {
   margin-top: 10px;
 }
@@ -169,6 +177,7 @@
   color: white;
 }
 
+/* Falling hearts animation container */
 .hearts-container {
   position: absolute;
   top: 0;
@@ -184,4 +193,73 @@
   top: -10vh;
   font-size: 1.5rem;
   opacity: 0;
+}
+
+/* ========================= */
+/* RESPONSIVE DESIGN SECTION */
+/* ========================= */
+
+@media (max-width: 1024px) {
+  .timeline-item {
+    width: 48%;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-container {
+    padding: 10px;
+  }
+
+  .timeline-line {
+    display: none;
+  }
+
+  .timeline-item,
+  .timeline-item.left,
+  .timeline-item.right {
+    width: 100%;
+    left: 0;
+    text-align: left;
+  }
+
+  .timeline-content {
+    padding: 15px;
+  }
+
+  .event-title {
+    font-size: 1.2rem;
+  }
+
+  .timeline-textarea {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-heading {
+    font-size: 1.8rem;
+  }
+
+  .timeline-input {
+    width: 90%;
+    font-size: 0.9rem;
+  }
+
+  .timeline-textarea {
+    height: 70px;
+    font-size: 0.9rem;
+  }
+
+  .timeline-btn {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
+
+  .event-description {
+    font-size: 0.9rem;
+  }
+
+  .timeline-content {
+    padding: 12px;
+  }
 }

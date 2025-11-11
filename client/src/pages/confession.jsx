@@ -29,16 +29,17 @@ export default function BirthdayLoveConfession() {
       animation: "fadeIn 2s ease",
     },
     title: {
-      fontSize: "32px",
+      fontSize: "2rem",
       fontWeight: "bold",
       color: "#e91e63",
       marginBottom: "10px",
       textShadow: "0 0 10px rgba(255,105,180,0.5)",
     },
     subtitle: {
-      fontSize: "18px",
+      fontSize: "1.1rem",
       color: "#555",
       marginBottom: "24px",
+      whiteSpace: "pre-line",
     },
     button: {
       padding: "14px 28px",
@@ -47,14 +48,14 @@ export default function BirthdayLoveConfession() {
       border: "none",
       borderRadius: "12px",
       cursor: "pointer",
-      fontSize: "17px",
+      fontSize: "1rem",
       fontWeight: "600",
       transition: "0.3s ease",
       boxShadow: "0 4px 12px rgba(255, 105, 180, 0.4)",
     },
     confessionBox: {
       animation: "fadeIn 2s ease-in-out",
-      fontSize: "19px",
+      fontSize: "1.1rem",
       color: "#333",
       lineHeight: "1.8",
       marginTop: "20px",
@@ -93,7 +94,7 @@ export default function BirthdayLoveConfession() {
 
   if (opened) {
     return (
-      <div style={styles.container}>
+      <div style={styles.container} className="birthday-love">
         <FloatingHearts />
         <div style={styles.cake}>🎂</div>
         <h1 style={styles.title}>Happy Birthday, My Love 💞</h1>
@@ -101,18 +102,13 @@ export default function BirthdayLoveConfession() {
         <p style={styles.confessionBox}>
           Every heartbeat whispers your name 💓{"\n"}
           You make my world brighter every single day 🌈{"\n"}
-          You're my peace, my chaos, my person 💕{"\n"}
-          {"\n"}
-          <strong>
-            I love you — truly, completely, endlessly ❤️
-          </strong>
-          {"\n"}
+          You're my peace, my chaos, my person 💕{"\n\n"}
+          <strong>I love you — truly, completely, endlessly ❤️</strong>{"\n"}
           <em>Happy Birthday, my forever person 💫</em>
         </p>
 
         <div style={styles.heart}>💞💞💞</div>
 
-        {/* 🩷 Redirects to login page */}
         <button
           style={{
             ...styles.button,
@@ -128,7 +124,7 @@ export default function BirthdayLoveConfession() {
   }
 
   return (
-    <div style={styles.container}>
+    <div style={styles.container} className="birthday-love">
       <FloatingHearts />
       <h1 style={styles.title}>🎉 Happy Birthday! 🎉</h1>
       <p style={styles.subtitle}>
@@ -150,6 +146,7 @@ export default function BirthdayLoveConfession() {
   );
 }
 
+/* ✅ Animations and Responsiveness */
 const styleSheet = document.createElement("style");
 styleSheet.innerHTML = `
 @keyframes fadeIn {
@@ -164,6 +161,65 @@ styleSheet.innerHTML = `
   0% { transform: translateY(0) scale(1); opacity: 0.8; }
   50% { opacity: 1; }
   100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+}
+
+/* 🌸 RESPONSIVE STYLES 🌸 */
+
+@media (max-width: 768px) {
+  .birthday-love {
+    margin: 40px 20px;
+    padding: 28px;
+  }
+  .birthday-love h1 {
+    font-size: 1.6rem !important;
+  }
+  .birthday-love p {
+    font-size: 1rem !important;
+  }
+  .birthday-love button {
+    padding: 12px 20px !important;
+    font-size: 0.95rem !important;
+  }
+  .birthday-love div[style*="font-size: 60px"] {
+    font-size: 48px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .birthday-love {
+    margin: 30px 10px;
+    padding: 20px;
+    border-radius: 18px;
+  }
+  .birthday-love h1 {
+    font-size: 1.4rem !important;
+  }
+  .birthday-love p {
+    font-size: 0.9rem !important;
+  }
+  .birthday-love button {
+    width: 100%;
+    padding: 10px 0 !important;
+    font-size: 0.9rem !important;
+  }
+  .birthday-love div[style*="font-size: 50px"] {
+    font-size: 38px !important;
+  }
+  .birthday-love div[style*="font-size: 60px"] {
+    font-size: 40px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .birthday-love {
+    padding: 16px;
+  }
+  .birthday-love h1 {
+    font-size: 1.2rem !important;
+  }
+  .birthday-love p {
+    font-size: 0.85rem !important;
+  }
 }
 `;
 document.head.appendChild(styleSheet);

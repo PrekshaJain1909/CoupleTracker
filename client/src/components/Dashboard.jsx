@@ -12,7 +12,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-// Wine-red themed colors
 const COLORS = ["#800020", "#B2224F", "#FF4D6D", "#A52A2A"];
 
 export default function Dashboard({ entries }) {
@@ -59,11 +58,11 @@ export default function Dashboard({ entries }) {
   }, [entries]);
 
   return (
-    <>
+    <div style={styles.container}>
       <div style={styles.dashboard}>
         <h2 style={styles.heading}>Dashboard</h2>
 
-        {/* Totals */}
+        {/* Totals Section */}
         <div style={styles.totalsGrid}>
           <div style={{ ...styles.totalCard, backgroundColor: "#800020" }}>
             <p style={styles.count}>{totals.mistakes}</p>
@@ -85,79 +84,98 @@ export default function Dashboard({ entries }) {
 
         {/* Pie Chart */}
         <h3 style={styles.subHeading}>Overall Distribution</h3>
-        <ResponsiveContainer width="100%" height={250}>
-          <PieChart>
-            <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={80} label>
-              {pieData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-            <Tooltip formatter={(value) => value.toLocaleString()} />
-          </PieChart>
-        </ResponsiveContainer>
+        <div style={styles.chartWrapper}>
+          <ResponsiveContainer width="100%" height={250}>
+            <PieChart>
+              <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={80} label>
+                {pieData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value) => value.toLocaleString()} />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
 
         {/* Bar Chart */}
         <h3 style={styles.subHeading}>Daily Stats</h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={barData}>
-            <XAxis dataKey="date" stroke="#800020" />
-            <YAxis stroke="#800020" />
-            <Tooltip formatter={(value) => value.toLocaleString()} />
-            <Legend />
-            <Bar dataKey="mistakes" fill="#800020" />
-            <Bar dataKey="punishments" fill="#B2224F" />
-            <Bar dataKey="drinks" fill="#FF4D6D" />
-            <Bar dataKey="smokes" fill="#A52A2A" />
-          </BarChart>
-        </ResponsiveContainer>
+        <div style={styles.chartWrapper}>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={barData}>
+              <XAxis dataKey="date" stroke="#800020" />
+              <YAxis stroke="#800020" />
+              <Tooltip formatter={(value) => value.toLocaleString()} />
+              <Legend />
+              <Bar dataKey="mistakes" fill="#800020" />
+              <Bar dataKey="punishments" fill="#B2224F" />
+              <Bar dataKey="drinks" fill="#FF4D6D" />
+              <Bar dataKey="smokes" fill="#A52A2A" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
 const styles = {
+  container: {
+    padding: "10px",
+  },
   dashboard: {
-    padding: "16px",
+    padding: "20px",
     backgroundColor: "#fff0f2",
     borderRadius: "12px",
     boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-    marginTop: "24px",
-    maxWidth: "900px",
-    marginLeft: "auto",
-    marginRight: "auto",
+    maxWidth: "950px",
+    margin: "auto",
     fontFamily: "'Poppins', sans-serif",
   },
   heading: {
-    fontSize: "1.5rem",
+    fontSize: "clamp(1.2rem, 2.5vw, 1.8rem)",
     fontWeight: "bold",
     marginBottom: "16px",
     color: "#800020",
+    textAlign: "center",
   },
   subHeading: {
     fontWeight: "600",
     marginTop: "24px",
-    marginBottom: "8px",
+    marginBottom: "12px",
     color: "#800020",
+    textAlign: "center",
+    fontSize: "clamp(1rem, 2vw, 1.2rem)",
   },
   totalsGrid: {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "12px",
-    marginBottom: "24px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+    gap: "15px",
+    marginBottom: "30px",
   },
   totalCard: {
     padding: "16px",
-    borderRadius: "8px",
+    borderRadius: "10px",
     textAlign: "center",
     color: "#fff",
+    boxShadow: "0 3px 10px rgba(0,0,0,0.1)",
+    transition: "transform 0.3s ease",
   },
   count: {
-    fontSize: "1.25rem",
+    fontSize: "clamp(1rem, 2vw, 1.4rem)",
     fontWeight: "bold",
     marginBottom: "4px",
   },
   cardLabel: {
-    fontSize: "0.9rem",
+    fontSize: "clamp(0.8rem, 1.5vw, 1rem)",
+  },
+  chartWrapper: {
+    width: "100%",
+    height: "auto",
+    overflowX: "auto",
+    background: "#fff",
+    borderRadius: "8px",
+    boxShadow: "0 3px 10px rgba(255, 105, 180, 0.15)",
+    padding: "10px",
   },
   noEntries: {
     padding: "16px",

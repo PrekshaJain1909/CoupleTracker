@@ -12,7 +12,6 @@ export default function Login({ onLogin }) {
       return;
     }
 
-    // Simulated login
     if (email === "Abhisha" && password === "1913") {
       setError("");
       onLogin({ email });
@@ -33,9 +32,10 @@ export default function Login({ onLogin }) {
       fontFamily: "'Poppins', sans-serif",
       overflow: "hidden",
       position: "relative",
+      padding: "20px",
     },
     container: {
-      width: "90%",
+      width: "100%",
       maxWidth: "400px",
       backgroundColor: "rgba(255, 255, 255, 0.9)",
       borderRadius: "20px",
@@ -65,10 +65,6 @@ export default function Login({ onLogin }) {
       fontSize: "14px",
       transition: "0.3s",
     },
-    inputFocus: {
-      borderColor: "#ff69b4",
-      boxShadow: "0 0 5px rgba(255, 105, 180, 0.5)",
-    },
     button: {
       width: "100%",
       padding: "12px",
@@ -81,9 +77,6 @@ export default function Login({ onLogin }) {
       fontWeight: "600",
       transition: "0.3s",
       marginTop: "4px",
-    },
-    buttonHover: {
-      backgroundColor: "#d81b60",
     },
     error: {
       color: "red",
@@ -107,9 +100,53 @@ export default function Login({ onLogin }) {
       animation: "floatUp 6s infinite ease-in",
       opacity: "0.7",
     },
+
+    /* ✅ Responsive adjustments */
+    "@media (max-width: 768px)": {
+      container: {
+        padding: "24px",
+        maxWidth: "320px",
+      },
+      title: {
+        fontSize: "24px",
+      },
+      subtitle: {
+        fontSize: "14px",
+      },
+      button: {
+        fontSize: "15px",
+        padding: "10px",
+      },
+    },
+    "@media (max-width: 480px)": {
+      container: {
+        padding: "20px",
+        maxWidth: "280px",
+      },
+      title: {
+        fontSize: "20px",
+      },
+      subtitle: {
+        fontSize: "13px",
+      },
+      input: {
+        fontSize: "13px",
+        padding: "10px",
+      },
+      button: {
+        fontSize: "14px",
+        padding: "10px",
+      },
+      glowText: {
+        fontSize: "13px",
+      },
+      heart: {
+        fontSize: "26px",
+      },
+    },
   };
 
-  // Randomly position floating hearts
+  // Floating hearts (randomly placed)
   const hearts = Array.from({ length: 10 }, (_, i) => ({
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
@@ -118,7 +155,6 @@ export default function Login({ onLogin }) {
 
   return (
     <div style={styles.page}>
-      {/* Floating hearts */}
       {hearts.map((h, i) => (
         <span
           key={i}
@@ -160,9 +196,7 @@ export default function Login({ onLogin }) {
           </button>
         </form>
 
-        <p style={styles.glowText}>
-          You + Me = Forever ♾️
-        </p>
+        <p style={styles.glowText}>You + Me = Forever ♾️</p>
       </div>
 
       <style>
@@ -180,6 +214,19 @@ export default function Login({ onLogin }) {
           @keyframes floatUp {
             0% { transform: translateY(0); opacity: 0.8; }
             100% { transform: translateY(-120vh); opacity: 0; }
+          }
+
+          /* 💕 Responsive styling for inline CSS */
+          @media (max-width: 768px) {
+            h1 { font-size: 24px !important; }
+            p { font-size: 14px !important; }
+            input, button { font-size: 15px !important; }
+          }
+
+          @media (max-width: 480px) {
+            h1 { font-size: 20px !important; }
+            input, button { font-size: 14px !important; }
+            .heart { font-size: 26px !important; }
           }
         `}
       </style>

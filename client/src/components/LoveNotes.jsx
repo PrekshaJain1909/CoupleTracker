@@ -39,7 +39,7 @@ export default function LoveNotes({ entries, onAddNote, onDeleteNote, onEditNote
   return (
     <>
       <div className="love-notes">
-        <h2>Love Notes</h2>
+        <h2>💌 Love Notes</h2>
 
         {/* Add Note */}
         <div className="add-note-container">
@@ -60,13 +60,15 @@ export default function LoveNotes({ entries, onAddNote, onDeleteNote, onEditNote
 
         {/* Notes List */}
         {loveNotes.length === 0 ? (
-          <p className="no-notes">No love notes yet.</p>
+          <p className="no-notes">💔 No love notes yet. Start writing!</p>
         ) : (
           <ul className="notes-list">
             {loveNotes.map((note) => (
               <li key={note.id} className="note-item">
                 <div className="note-info">
-                  <p className="note-header">{note.date} - {note.who}</p>
+                  <p className="note-header">
+                    {note.date} — <strong>{note.who}</strong>
+                  </p>
 
                   {editingId === note.id ? (
                     <div className="edit-container">
@@ -74,10 +76,20 @@ export default function LoveNotes({ entries, onAddNote, onDeleteNote, onEditNote
                         type="text"
                         value={editText}
                         onChange={(e) => setEditText(e.target.value)}
-                        placeholder="Edit note"
+                        placeholder="Edit your note..."
                       />
-                      <button className="save-btn" onClick={() => handleSaveEdit(note.id)}>Save</button>
-                      <button className="cancel-btn" onClick={() => setEditingId(null)}>Cancel</button>
+                      <button
+                        className="save-btn"
+                        onClick={() => handleSaveEdit(note.id)}
+                      >
+                        Save
+                      </button>
+                      <button
+                        className="cancel-btn"
+                        onClick={() => setEditingId(null)}
+                      >
+                        Cancel
+                      </button>
                     </div>
                   ) : (
                     <p className="note-text">{note.text}</p>
@@ -92,10 +104,13 @@ export default function LoveNotes({ entries, onAddNote, onDeleteNote, onEditNote
                       setEditText(note.text);
                     }}
                   >
-                    Edit
+                    ✏️ Edit
                   </button>
-                  <button className="delete-btn" onClick={() => onDeleteNote(note.id)}>
-                    Delete
+                  <button
+                    className="delete-btn"
+                    onClick={() => onDeleteNote(note.id)}
+                  >
+                    🗑 Delete
                   </button>
                 </div>
               </li>
@@ -105,182 +120,224 @@ export default function LoveNotes({ entries, onAddNote, onDeleteNote, onEditNote
       </div>
 
       <style>{`
+        /* 🌸 Container */
         .love-notes {
-          padding: 16px;
-          background-color: #fff;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-          margin-top: 24px;
-          max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
+          padding: 20px;
+          background: linear-gradient(135deg, #fff0f6, #ffe5ef, #fff0f6);
+          border-radius: 18px;
+          box-shadow: 0 6px 18px rgba(255, 105, 180, 0.25);
+          margin: 30px auto;
+          max-width: 900px;
+          font-family: "Poppins", sans-serif;
+          transition: all 0.3s ease;
         }
 
         .love-notes h2 {
-          font-size: 1.5rem;
-          font-weight: bold;
-          margin-bottom: 12px;
+          text-align: center;
+          color: #d63384;
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: 20px;
+          text-shadow: 0 1px 3px rgba(214, 51, 132, 0.2);
         }
 
+        /* 💕 Add Note */
         .add-note-container {
           display: flex;
-          flex-direction: column;
-          gap: 8px;
-          margin-bottom: 16px;
-        }
-
-        @media(min-width: 768px) {
-          .add-note-container {
-            flex-direction: row;
-          }
+          flex-wrap: wrap;
+          gap: 10px;
+          justify-content: center;
+          margin-bottom: 20px;
         }
 
         .add-note-container select,
         .add-note-container input {
-          padding: 8px;
-          border-radius: 4px;
-          border: 1px solid #ccc;
+          padding: 10px;
+          border-radius: 8px;
+          border: 1px solid #ffafd2;
+          font-size: 1rem;
+          outline: none;
         }
 
         .add-note-container select {
-          width: 100%;
-          max-width: 120px;
+          background: #fff0f6;
+          color: #d63384;
+          font-weight: 600;
         }
 
         .add-note-container input {
           flex: 1;
+          min-width: 200px;
+          background: #fff;
         }
 
         .add-note-container button {
-          padding: 8px 16px;
-          background-color: #ec4899;
+          background: linear-gradient(90deg, #ff77a9, #ff5c9b);
           color: #fff;
           border: none;
-          border-radius: 4px;
+          padding: 10px 18px;
+          border-radius: 8px;
+          font-weight: bold;
           cursor: pointer;
+          transition: all 0.3s ease;
         }
 
         .add-note-container button:hover {
-          background-color: #db2777;
+          transform: scale(1.05);
+          background: linear-gradient(90deg, #ff5c9b, #ff4081);
         }
 
-        .no-notes {
-          color: #6b7280;
-        }
-
+        /* 📝 Notes List */
         .notes-list {
           list-style: none;
           padding: 0;
-          max-height: 256px;
-          overflow-y: auto;
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 12px;
         }
 
         .note-item {
-          padding: 12px;
-          border: 1px solid #ccc;
-          border-radius: 6px;
+          background: #fff;
+          padding: 15px;
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(255, 182, 193, 0.25);
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          transition: background-color 0.2s;
+          transition: all 0.3s ease;
         }
 
         .note-item:hover {
-          background-color: #f9f9f9;
-        }
-
-        .note-info {
-          flex: 1;
+          transform: translateY(-3px);
+          box-shadow: 0 8px 16px rgba(214, 51, 132, 0.25);
         }
 
         .note-header {
           font-weight: 600;
+          color: #d63384;
         }
 
         .note-text {
-          margin-top: 4px;
-          color: #374151;
-        }
-
-        .edit-container {
-          display: flex;
-          gap: 8px;
-          margin-top: 4px;
-        }
-
-        .edit-container input {
-          flex: 1;
-          padding: 4px 8px;
-          border-radius: 4px;
-          border: 1px solid #ccc;
-        }
-
-        .save-btn {
-          background-color: #10b981;
-          color: #fff;
-          border: none;
-          border-radius: 4px;
-          padding: 4px 8px;
-          cursor: pointer;
-        }
-
-        .save-btn:hover {
-          background-color: #059669;
-        }
-
-        .cancel-btn {
-          background-color: #d1d5db;
-          border: none;
-          border-radius: 4px;
-          padding: 4px 8px;
-          cursor: pointer;
-        }
-
-        .cancel-btn:hover {
-          background-color: #9ca3af;
+          margin-top: 8px;
+          color: #333;
+          line-height: 1.4;
         }
 
         .note-actions {
           display: flex;
           gap: 8px;
-          margin-top: 8px;
+          margin-top: 10px;
+          justify-content: flex-end;
         }
 
-        @media(min-width: 768px) {
-          .note-item {
-            flex-direction: row;
-            align-items: center;
-          }
-          .note-actions {
-            margin-top: 0;
-          }
+        /* ✏️ Buttons */
+        .edit-btn, .delete-btn, .save-btn, .cancel-btn {
+          border: none;
+          cursor: pointer;
+          padding: 6px 10px;
+          border-radius: 6px;
+          font-weight: 600;
+          transition: all 0.3s ease;
         }
 
         .edit-btn {
-          color: #3b82f6;
-          font-weight: bold;
-          background: none;
-          border: none;
-          cursor: pointer;
-        }
-
-        .edit-btn:hover {
-          color: #1d4ed8;
+          background: linear-gradient(90deg, #3b82f6, #2563eb);
+          color: #fff;
         }
 
         .delete-btn {
-          color: #ef4444;
-          font-weight: bold;
-          background: none;
-          border: none;
-          cursor: pointer;
+          background: linear-gradient(90deg, #ef4444, #b91c1c);
+          color: #fff;
         }
 
-        .delete-btn:hover {
-          color: #b91c1c;
+        .save-btn {
+          background: linear-gradient(90deg, #10b981, #059669);
+          color: #fff;
+        }
+
+        .cancel-btn {
+          background: linear-gradient(90deg, #9ca3af, #6b7280);
+          color: #fff;
+        }
+
+        .edit-btn:hover, .delete-btn:hover, .save-btn:hover, .cancel-btn:hover {
+          transform: scale(1.05);
+          opacity: 0.9;
+        }
+
+        /* ✍️ Edit Mode */
+        .edit-container {
+          display: flex;
+          gap: 8px;
+          margin-top: 8px;
+          flex-wrap: wrap;
+        }
+
+        .edit-container input {
+          flex: 1;
+          padding: 8px 10px;
+          border-radius: 6px;
+          border: 1px solid #ffd6e8;
+        }
+
+        /* 💔 Empty State */
+        .no-notes {
+          text-align: center;
+          color: #999;
+          font-style: italic;
+          margin-top: 10px;
+        }
+
+        /* 📱 Responsive */
+        @media (max-width: 768px) {
+          .love-notes {
+            padding: 16px;
+          }
+
+          .love-notes h2 {
+            font-size: 1.6rem;
+          }
+
+          .add-note-container input {
+            min-width: 150px;
+          }
+
+          .note-item {
+            padding: 12px;
+          }
+
+          .note-actions {
+            justify-content: center;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .love-notes {
+            padding: 12px;
+            border-radius: 12px;
+          }
+
+          .add-note-container {
+            flex-direction: column;
+          }
+
+          .add-note-container input,
+          .add-note-container select,
+          .add-note-container button {
+            width: 100%;
+          }
+
+          .note-actions {
+            flex-direction: column;
+            align-items: stretch;
+          }
+
+          .note-item {
+            font-size: 0.9rem;
+          }
+
+          .note-text {
+            font-size: 0.95rem;
+          }
         }
       `}</style>
     </>

@@ -116,6 +116,7 @@ h2 {
   display: flex;
   gap: 14px;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .entry-details {
@@ -129,7 +130,6 @@ h2 {
   align-items: center;
   flex-wrap: wrap;
   gap: 4px;
-  margin-right: 650px;
   font-weight: 600;
   color: #d63384;
   font-size: 1rem;
@@ -166,6 +166,7 @@ h2 {
   justify-content: flex-end;
   gap: 10px;
   margin-top: 14px;
+  flex-wrap: wrap;
 }
 
 /* ❤️ Buttons */
@@ -210,7 +211,6 @@ h2 {
   animation: popIn 0.6s ease;
 }
 
-/* Different types with gradients 💫 */
 .mistake { background: linear-gradient(135deg, #ff4d6d, #ff8fab); }
 .punishment { background: linear-gradient(135deg, #6c757d, #adb5bd); }
 .drink { background: linear-gradient(135deg, #ff8fab, #ffccd5); }
@@ -272,4 +272,84 @@ h2 {
 @keyframes popIn {
   0% { transform: scale(0.7); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
+}
+
+/* 📱 Responsive Design */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .entry-list {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .entry-header {
+    font-size: 0.95rem;
+    margin-right: 0;
+  }
+
+  .entry-card {
+    padding: 18px;
+  }
+
+  .filter-container select {
+    width: 80%;
+  }
+}
+
+/* Mobiles */
+@media (max-width: 480px) {
+  .entry-list {
+    padding: 15px;
+    margin: 15px;
+    border-radius: 16px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .entry-card {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+
+  .entry-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    top: 10px;
+    right: 10px;
+  }
+
+  .edit-btn,
+  .delete-btn,
+  .save-btn,
+  .cancel-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .entry-bottom {
+    justify-content: center;
+  }
+
+  .filter-container select {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+}
+
+/* Small Laptops */
+@media (max-width: 1024px) {
+  .entry-list {
+    max-width: 90%;
+  }
 }
