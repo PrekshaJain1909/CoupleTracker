@@ -13,7 +13,7 @@ export default function Login({ onLogin }) {
     }
 
     // Simulated login
-    if (email === "you@example.com" && password === "123456") {
+    if (email === "Abhisha" && password === "1913") {
       setError("");
       onLogin({ email });
       setEmail("");
@@ -142,8 +142,8 @@ export default function Login({ onLogin }) {
 
         <form onSubmit={handleSubmit}>
           <input
-            type="email"
-            placeholder="Your magical email 💌"
+            type="text"
+            placeholder="Couple Name 💌"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             style={styles.input}
